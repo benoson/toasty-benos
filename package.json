@@ -1,0 +1,21 @@
+{
+  "name": "toasty-benos",
+  "version": "1.0.7",
+  "description": "a package for toasts",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Benos",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benoson/toasty-benos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benoson/toasty-benos/issues"
+  },
+  "homepage": "https://github.com/benoson/toasty-benos#readme"
+}
