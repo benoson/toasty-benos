@@ -1,3 +1,30 @@
+const getXIcon = () => {
+  const xIcon = document.createElement("div");
+  xIcon.innerHTML = `
+  <svg width="100%" height="100%" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>close [#1511]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-419.000000, -240.000000)" fill="#ffffff"> <g id="icons" transform="translate(56.000000, 160.000000)"> <polygon id="close-[#1511]" points="375.0183 90 384 98.554 382.48065 100 373.5 91.446 364.5183 100 363 98.554 371.98065 90 363 81.446 364.5183 80 373.5 88.554 382.48065 80 384 81.446"> </polygon> </g> </g> </g> </g></svg>
+  `;
+
+  return xIcon;
+};
+
+const getSuccessIcon = () => {
+  const successIcon = document.createElement("div");
+  successIcon.innerHTML = `
+  <svg width="100%" height="100%" fill="#ffffff" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>checkmark2</title> <path d="M28.998 8.531l-2.134-2.134c-0.394-0.393-1.030-0.393-1.423 0l-12.795 12.795-6.086-6.13c-0.393-0.393-1.029-0.393-1.423 0l-2.134 2.134c-0.393 0.394-0.393 1.030 0 1.423l8.924 8.984c0.393 0.393 1.030 0.393 1.423 0l15.648-15.649c0.393-0.392 0.393-1.030 0-1.423z"></path> </g></svg>
+  `;
+
+  return successIcon;
+};
+
+const getInfoIcon = () => {
+  const infoIcon = document.createElement("div");
+  infoIcon.innerHTML = `
+  <svg width="100%" height="100%" fill="#ffffff" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="Icons" x="-704" y="-192" width="1280" height="800" style="fill:none;"></rect> <g id="Icons1" serif:id="Icons"> <g id="Strike"> </g> <g id="H1"> </g> <g id="H2"> </g> <g id="H3"> </g> <g id="list-ul"> </g> <g id="hamburger-1"> </g> <g id="hamburger-2"> </g> <g id="list-ol"> </g> <g id="list-task"> </g> <g id="trash"> </g> <g id="vertical-menu"> </g> <g id="horizontal-menu"> </g> <g id="sidebar-2"> </g> <g id="Pen"> </g> <g id="Pen1" serif:id="Pen"> </g> <g id="clock"> </g> <g id="external-link"> </g> <g id="hr"> </g> <g id="info"> </g> <g id="warning"> </g> <g id="plus-circle"> </g> <g id="minus-circle"> </g> <g id="vue"> </g> <g id="cog"> </g> <g id="logo"> </g> <path id="exclamation" d="M34.476,42.174l-5.464,0l-0.425,-34.192l6.348,0l-0.459,34.192Zm-6.118,10.405c0,-0.981 0.3,-1.805 0.9,-2.47c0.599,-0.665 1.488,-0.998 2.666,-0.998c1.178,0 2.073,0.333 2.683,0.998c0.611,0.665 0.916,1.489 0.916,2.47c0,0.982 -0.305,1.794 -0.916,2.438c-0.61,0.643 -1.505,0.965 -2.683,0.965c-1.178,0 -2.067,-0.322 -2.666,-0.965c-0.6,-0.644 -0.9,-1.456 -0.9,-2.438Z" style="fill-rule:nonzero;"></path> <g id="radio-check"> </g> <g id="eye-slash"> </g> <g id="eye"> </g> <g id="toggle-off"> </g> <g id="shredder"> </g> <g id="spinner--loading--dots-" serif:id="spinner [loading, dots]"> </g> <g id="react"> </g> <g id="check-selected"> </g> <g id="turn-off"> </g> <g id="code-block"> </g> <g id="user"> </g> <g id="coffee-bean"> </g> <g id="coffee-beans"> <g id="coffee-bean1" serif:id="coffee-bean"> </g> </g> <g id="coffee-bean-filled"> </g> <g id="coffee-beans-filled"> <g id="coffee-bean2" serif:id="coffee-bean"> </g> </g> <g id="clipboard"> </g> <g id="clipboard-paste"> </g> <g id="clipboard-copy"> </g> <g id="Layer1"> </g> </g> </g></svg>
+  `;
+
+  return infoIcon;
+};
+
 const TOAST_VARIANTS = {
   SUCCESS: "SUCCESS",
   ERROR: "ERROR",
@@ -23,17 +50,17 @@ const ANIMATION_DIRECTIONS = {
 const VARIANT_TO_PROPS = {
   [TOAST_VARIANTS.ERROR]: {
     background: "#c91f1f",
-    icon: new URL("public/assets/x-icon.svg", import.meta.url).href,
+    iconElement: getXIcon(),
     timeBarBackground: "#071a52",
   },
   [TOAST_VARIANTS.INFO]: {
     background: "#071a52",
-    icon: new URL("public/assets/exclamation-mark-icon.svg", import.meta.url).href,
+    iconElement: getInfoIcon(),
     timeBarBackground: "#19c6e3",
   },
   [TOAST_VARIANTS.SUCCESS]: {
     background: "#10b151",
-    icon: new URL("public/assets/checkmark-icon.svg", import.meta.url).href,
+    iconElement: getSuccessIcon(),
     timeBarBackground: "#071a52",
   },
 };
@@ -177,7 +204,7 @@ class ToastyBenos extends HTMLElement {
         </style>
 
         <div id=${this.wrapperId} class="toasty-benos">
-            <img class="toasty-benos-main-icon" src=${variantProps.icon} />
+            <div id="icon-container" class="toasty-benos-main-icon"></div>
 
             <div class="toasty-benos-content">
                 <span>${title}</span>
@@ -192,25 +219,29 @@ class ToastyBenos extends HTMLElement {
             ${
               isDismissable
                 ? `<div class="toasty-benos-dismiss-wrapper">
-                    <img src=${
-                      new URL("public/assets/x-icon.svg", import.meta.url).href
-                    } class="toasty-benos-x-icon" />
+                    <div id="toasty-benos-dismiss-icon" class="toasty-benos-x-icon"></div>
                 </div>`
                 : ""
             }
 
             ${
               isShowTimeBar
-                ? `<div id="toasty-benos-time-bar" class="toasty-benos-time-bar" style="width: 100%" />`
+                ? `<div id="toasty-benos-time-bar" class="toasty-benos-time-bar" style="width: 100%"></div>`
                 : ""
             }
         </div>
     `;
 
+    // appending the svg element to the icon container, instead of importing an SVG
+    this.shadowRoot.querySelector("#icon-container").appendChild(variantProps.iconElement);
+
     // if dismissable, add "click" event listener for the "x" icon
     if (isDismissable) {
       const dismissEl = this.shadowRoot.querySelector(".toasty-benos-dismiss-wrapper");
       dismissEl.addEventListener("click", this.hideToast);
+
+      const dismissIconEl = this.shadowRoot.querySelector("#toasty-benos-dismiss-icon");
+      dismissIconEl.appendChild(getXIcon());
     }
 
     // adding animation for the time bar
