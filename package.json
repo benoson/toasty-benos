@@ -1,6 +1,6 @@
 {
   "name": "toasty-benos",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "a package for toasts",
   "main": "dist/toasty-benos.js",
   "types": "index.d.ts",

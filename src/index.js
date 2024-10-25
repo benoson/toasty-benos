@@ -50,17 +50,17 @@ const ANIMATION_DIRECTIONS = {
 const VARIANT_TO_PROPS = {
   [TOAST_VARIANTS.ERROR]: {
     background: "#c91f1f",
-    iconElement: getXIcon(),
+    getIconElement: getXIcon,
     timeBarBackground: "#071a52",
   },
   [TOAST_VARIANTS.INFO]: {
     background: "#071a52",
-    iconElement: getInfoIcon(),
+    getIconElement: getInfoIcon,
     timeBarBackground: "#19c6e3",
   },
   [TOAST_VARIANTS.SUCCESS]: {
     background: "#10b151",
-    iconElement: getSuccessIcon(),
+    getIconElement: getSuccessIcon,
     timeBarBackground: "#071a52",
   },
 };
@@ -233,7 +233,7 @@ class ToastyBenos extends HTMLElement {
     `;
 
     // appending the svg element to the icon container, instead of importing an SVG
-    this.shadowRoot.querySelector("#icon-container").appendChild(variantProps.iconElement);
+    this.shadowRoot.querySelector("#icon-container").appendChild(variantProps.getIconElement());
 
     // if dismissable, add "click" event listener for the "x" icon
     if (isDismissable) {
