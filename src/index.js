@@ -448,37 +448,37 @@ export const showToast = ({
 // defining the element in the DOM
 window.customElements.define("toast-zilla", Toastzilla);
 
-function x() {
-  showToast({
-    subtitle: "Lolz this is the subtitle :D enjoy!",
-    title: "Lmaoooo this is the title!!",
-    isShowTimeBar: true,
-    isShowAppearAndDismissAnimation: true,
-    position: "bottom-left",
-    appearAnimationDirection: "bottom",
-    variant: "SUCCESS",
-    isShowIconAnimations: true,
-    isDismissable: false,
-    duration: 30000,
-    timerColor: "#ffdd99",
-    isShowIcon: false,
-    backgroundColor: "blue",
-  });
-}
+// function x() {
+//   showToast({
+//     subtitle: "Lolz this is the subtitle :D enjoy!",
+//     title: "Lmaoooo this is the title!!",
+//     isShowTimeBar: true,
+//     isShowAppearAndDismissAnimation: true,
+//     position: "bottom-left",
+//     appearAnimationDirection: "bottom",
+//     variant: "SUCCESS",
+//     isShowIconAnimations: true,
+//     isDismissable: false,
+//     duration: 30000,
+//     timerColor: "#ffdd99",
+//     isShowIcon: false,
+//     backgroundColor: "blue",
+//   });
+// }
 
-function y() {
-  showToast({
-    subtitle: "Lolz this is the subtitle :D enjoy!",
-    title: "Lmaoooo this is the title!!",
-    isShowTimeBar: true,
-    isShowAppearAndDismissAnimation: true,
-    position: "top-left",
-    appearAnimationDirection: "right",
-    variant: "ERROR",
-    isShowIconAnimations: true,
-    isDismissable: false,
-    duration: 30000,
-    timerColor: "black",
-    isShowIcon: false,
-  });
-}
+// function y() {
+//   showToast({
+//     subtitle: "Lolz this is the subtitle :D enjoy!",
+//     title: "Lmaoooo this is the title!!",
+//     isShowTimeBar: true,
+//     isShowAppearAndDismissAnimation: true,
+//     position: "top-left",
+//     appearAnimationDirection: "right",
+//     variant: "ERROR",
+//     isShowIconAnimations: true,
+//     isDismissable: false,
+//     duration: 30000,
+//     timerColor: "black",
+//     isShowIcon: false,
+//   });
+// }
