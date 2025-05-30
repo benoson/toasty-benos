@@ -447,6 +447,8 @@ const showToast = ({
   toastsWrapper.appendChild(toast);
 };
 
+module.exports = { showToast };
+
 // defining the element in the DOM
 window.customElements.define("toast-zilla", Toastzilla);
 
