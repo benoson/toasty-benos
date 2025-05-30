@@ -398,10 +398,7 @@ const initToastPositionalWrappers = (appearAnimationDirection) => {
   });
 };
 
-//
-//
-
-const showToast = ({
+export const showToast = ({
   variant = TOAST_VARIANTS.INFO,
   title,
   subtitle,
@@ -447,8 +444,6 @@ const showToast = ({
 
   toastsWrapper.appendChild(toast);
 };
-
-module.exports = { showToast };
 
 // defining the element in the DOM
 window.customElements.define("toast-zilla", Toastzilla);
