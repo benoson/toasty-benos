@@ -20,6 +20,9 @@ declare module "toastzilla" {
     appearAnimationDirection?: "left" | "right" | "top" | "bottom";
     isShowAppearAndDismissAnimation?: boolean;
     isShowIconAnimations?: boolean;
+    timerColor?: string;
+    isShowIcon?: boolean;
+    backgroundColor?: string;
   }
 
   // The main function to show the toast
