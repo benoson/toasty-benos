@@ -1,6 +1,6 @@
 {
   "name": "toastzilla",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "a package for toasts",
   "main": "dist/toastzilla.js",
   "types": "index.d.ts",
