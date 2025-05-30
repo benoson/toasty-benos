@@ -51,21 +51,21 @@ const VARIANT_TO_PROPS = {
   [TOAST_VARIANTS.ERROR]: {
     background: "#c91f1f",
     getIconElement: getXIcon,
-    timeBarBackground: "#071a52",
+    timerColor: "#071a52",
   },
   [TOAST_VARIANTS.INFO]: {
-    background: "#071a52",
+    background: "#000000",
     getIconElement: getInfoIcon,
-    timeBarBackground: "#19c6e3",
+    timerColor: "#ffffff",
   },
   [TOAST_VARIANTS.SUCCESS]: {
     background: "#10b151",
     getIconElement: getSuccessIcon,
-    timeBarBackground: "#071a52",
+    timerColor: "#ffffff",
   },
 };
 
-class ToastyBenos extends HTMLElement {
+class Toastzilla extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -91,15 +91,26 @@ class ToastyBenos extends HTMLElement {
     const isShowAppearAndDismissAnimation =
       this.getAttribute("is-show-appear-and-dismiss-animationation") === "true";
     const isShowIconAnimations = this.getAttribute("is-show-icon-animations") === "true";
+    const isShowIcon = this.getAttribute("is-show-icon") === "true";
+    const timerColor = this.getAttribute("timer-color");
+    const backgroundColor = this.getAttribute("background-color");
 
     if (!TOAST_VARIANTS[variant]) variant = TOAST_VARIANTS.INFO;
 
-    const variantProps = VARIANT_TO_PROPS[variant];
+    console.log("backgroundColor", backgroundColor);
+
+    const variantProps = {
+      ...VARIANT_TO_PROPS[variant],
+      timerColor: timerColor || VARIANT_TO_PROPS[variant].timerColor,
+      background: backgroundColor || VARIANT_TO_PROPS[variant].background,
+    };
+
+    console.log("variantProps", variantProps);
 
     const paddingDown = isShowTimeBar ? "16px" : "8px";
     const padding = isDismissable ? `8px 64px ${paddingDown} 16px` : `8px 16px ${paddingDown} 16px`;
 
-    this.wrapperId = `toasty-benos-${(Math.random() * 1).toFixed(3)}`.replace(".", "");
+    this.wrapperId = `toastzilla-${(Math.random() * 1).toFixed(3)}`.replace(".", "");
 
     this.shadowRoot.innerHTML = `
         <style>
@@ -153,101 +164,103 @@ class ToastyBenos extends HTMLElement {
                 to { width: 0%; }
             }
 
-            .toasty-benos {
+            .toastzilla {
                 display: flex;
-                justify-content: space-between;
                 column-gap: 16px;
                 align-items: center;
-                border-radius: 2px;
                 color: white;
                 background-color: ${variantProps.background};
                 padding: ${padding};
                 font-family: system-ui;
                 position: relative;
+                border-radius: 3px;
+                min-width: 200px;
             }
 
-            .toasty-benos-main-icon {
+            .toastzilla-main-icon {
                 width: 32px;
                 height: 32px;
                 transition: 1s all;
             }
 
-            .toasty-benos-content {
+            .toastzilla-content {
                 display: flex;
                 flex-direction: column;
                 row-gap: 4px;
                 width: content-width;
             }
 
-            .toasty-benos-subtitle {
+            .toastzilla-subtitle {
                 font-size: 14px;
             }
 
-            .toasty-benos-dismiss-wrapper {
+            .toastzilla-dismiss-wrapper {
                 position: absolute;
                 top: 8px;
                 right: 12px;
             }
 
-            .toasty-benos-x-icon {
+            .toastzilla-x-icon {
                 cursor: pointer;
                 width: 12px;
                 height: 12px;
             }
 
-            .toasty-benos-time-bar {
-                height: 4px;
+            .toastzilla-time-bar {
+                height: 6px;
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
             }
         </style>
 
-        <div id=${this.wrapperId} class="toasty-benos">
-            <div id="icon-container" class="toasty-benos-main-icon"></div>
+        <div id=${this.wrapperId} class="toastzilla">
+            ${isShowIcon ? '<div id="icon-container" class="toastzilla-main-icon"></div>' : ""}
 
-            <div class="toasty-benos-content">
+            <div class="toastzilla-content">
                 <span>${title}</span>
 
                 ${
                   subtitle !== "undefined"
-                    ? `<span class="toasty-benos-subtitle">${subtitle}</span>`
+                    ? `<span class="toastzilla-subtitle">${subtitle}</span>`
                     : ""
                 }
             </div>
 
             ${
               isDismissable
-                ? `<div class="toasty-benos-dismiss-wrapper">
-                    <div id="toasty-benos-dismiss-icon" class="toasty-benos-x-icon"></div>
+                ? `<div class="toastzilla-dismiss-wrapper">
+                    <div id="toastzilla-dismiss-icon" class="toastzilla-x-icon"></div>
                 </div>`
                 : ""
             }
 
             ${
               isShowTimeBar
-                ? `<div id="toasty-benos-time-bar" class="toasty-benos-time-bar" style="width: 100%"></div>`
+                ? `<div id="toastzilla-time-bar" class="toastzilla-time-bar" style="width: 100%"></div>`
                 : ""
             }
         </div>
     `;
 
-    // appending the svg element to the icon container, instead of importing an SVG
-    this.shadowRoot.querySelector("#icon-container").appendChild(variantProps.getIconElement());
+    if (isShowIcon) {
+      // appending the svg element to the icon container, instead of importing an SVG
+      this.shadowRoot.querySelector("#icon-container").appendChild(variantProps.getIconElement());
+    }
 
     // if dismissable, add "click" event listener for the "x" icon
     if (isDismissable) {
-      const dismissEl = this.shadowRoot.querySelector(".toasty-benos-dismiss-wrapper");
+      const dismissEl = this.shadowRoot.querySelector(".toastzilla-dismiss-wrapper");
       dismissEl.addEventListener("click", this.hideToast);
 
-      const dismissIconEl = this.shadowRoot.querySelector("#toasty-benos-dismiss-icon");
+      const dismissIconEl = this.shadowRoot.querySelector("#toastzilla-dismiss-icon");
       dismissIconEl.appendChild(getXIcon());
     }
 
     // adding animation for the time bar
     if (isShowTimeBar) {
-      const timeBarEl = this.shadowRoot.querySelector("#toasty-benos-time-bar");
-      timeBarEl.style.background = variantProps.timeBarBackground;
+      const timeBarEl = this.shadowRoot.querySelector("#toastzilla-time-bar");
+      timeBarEl.style.background = variantProps.timerColor;
       timeBarEl.style.animation = `time-bar-animation ${duration}ms cubic-bezier(0.9, 0.44, 0.27, 0.89) 0s 1 normal none running`;
     }
 
@@ -264,8 +277,8 @@ class ToastyBenos extends HTMLElement {
       }
     }
 
-    if (isShowIconAnimations) {
-      const mainIconEl = this.shadowRoot.querySelector(".toasty-benos-main-icon");
+    if (isShowIconAnimations && isShowIcon) {
+      const mainIconEl = this.shadowRoot.querySelector(".toastzilla-main-icon");
       mainIconEl.style.animation = "main-icon-animation 1.5s";
     }
 
@@ -282,24 +295,42 @@ class ToastyBenos extends HTMLElement {
     const isDismissable = this.getAttribute("is-dismissable") === "true";
 
     if (isDismissable) {
-      const dismissEl = this.shadowRoot.querySelector(".toasty-benos-dismiss-wrapper");
+      const dismissEl = this.shadowRoot.querySelector(".toastzilla-dismiss-wrapper");
       dismissEl.removeEventListener("click", this.hideToast);
     }
   }
 }
 
 // all of the toasts wrappers - one for each possible position
-const initToastPositionalWrappers = () => {
+const initToastPositionalWrappers = (appearAnimationDirection) => {
   Object.keys(TOAST_POSITIONS).forEach((position) => {
+    const divId = `toastzilla-wrapper-${position}`;
+    const isElementExists = document.getElementById(divId);
+
+    if (isElementExists) return;
+
     const specificToastPositionWrapper = document.createElement("div");
-    specificToastPositionWrapper.setAttribute("id", `toasty-benos-wrapper-${position}`);
+    specificToastPositionWrapper.setAttribute("id", divId);
 
     let right = "16px";
     let left = "";
-    let bottom = "16px";
+    let bottom = "0px";
     let top = "";
     let transform = "";
     let alignItems = "flex-end";
+
+    let overflow = "";
+
+    if (
+      appearAnimationDirection === "bottom" &&
+      [
+        TOAST_POSITIONS["bottom-left"],
+        TOAST_POSITIONS["bottom-center"],
+        TOAST_POSITIONS["bottom-right"],
+      ].includes(position)
+    ) {
+      overflow = "hidden";
+    }
 
     switch (position) {
       case TOAST_POSITIONS["bottom-left"]:
@@ -355,6 +386,9 @@ const initToastPositionalWrappers = () => {
     specificToastPositionWrapper.style.transform = transform;
     specificToastPositionWrapper.style.alignItems = alignItems;
 
+    specificToastPositionWrapper.style.overflow = overflow;
+
+    specificToastPositionWrapper.style.paddingBottom = "16px";
     specificToastPositionWrapper.style.position = "absolute";
     specificToastPositionWrapper.style.display = "flex";
     specificToastPositionWrapper.style.flexDirection = "column";
@@ -363,22 +397,26 @@ const initToastPositionalWrappers = () => {
     document.body.appendChild(specificToastPositionWrapper);
   });
 };
-initToastPositionalWrappers();
 
-export const showToast = ({
+const showToast = ({
   variant = TOAST_VARIANTS.INFO,
   title,
   subtitle,
   duration,
   isDismissable = true,
-  isShowTimeBar = false,
+  isShowTimeBar,
   position = TOAST_POSITIONS["bottom-right"],
   dismissAnimationDirection = ANIMATION_DIRECTIONS.bottom,
   appearAnimationDirection = ANIMATION_DIRECTIONS.bottom,
-  isShowAppearAndDismissAnimation = false,
-  isShowIconAnimations = false,
+  isShowAppearAndDismissAnimation,
+  isShowIcon = true,
+  isShowIconAnimations,
+  timerColor = "",
+  backgroundColor = "",
 }) => {
-  const toast = document.createElement("toasty-benos");
+  initToastPositionalWrappers(appearAnimationDirection);
+
+  const toast = document.createElement("toast-zilla");
 
   toast.setAttribute("variant", variant);
   toast.setAttribute("title", title || "Placeholder");
@@ -390,10 +428,13 @@ export const showToast = ({
   toast.setAttribute("dismiss-animation-direction", dismissAnimationDirection);
   toast.setAttribute("appear-animation-direction", appearAnimationDirection);
   toast.setAttribute("is-show-appear-and-dismiss-animationation", isShowAppearAndDismissAnimation);
+  toast.setAttribute("is-show-icon", isShowIcon);
   toast.setAttribute("is-show-icon-animations", isShowIconAnimations);
+  toast.setAttribute("timer-color", timerColor);
+  toast.setAttribute("background-color", backgroundColor);
 
   // we have several wrappers - one for each possible position
-  const toastsWrapper = document.getElementById(`toasty-benos-wrapper-${position}`);
+  const toastsWrapper = document.getElementById(`toastzilla-wrapper-${position}`);
   const windowHeight = window.innerHeight;
 
   //   if the height of the wrapper is half of the window, remove the first one to make room for the next one
@@ -405,4 +446,39 @@ export const showToast = ({
 };
 
 // defining the element in the DOM
-window.customElements.define("toasty-benos", ToastyBenos);
+window.customElements.define("toast-zilla", Toastzilla);
+
+function x() {
+  showToast({
+    subtitle: "Lolz this is the subtitle :D enjoy!",
+    title: "Lmaoooo this is the title!!",
+    isShowTimeBar: true,
+    isShowAppearAndDismissAnimation: true,
+    position: "bottom-left",
+    appearAnimationDirection: "bottom",
+    variant: "SUCCESS",
+    isShowIconAnimations: true,
+    isDismissable: false,
+    duration: 30000,
+    timerColor: "#ffdd99",
+    isShowIcon: false,
+    backgroundColor: "blue",
+  });
+}
+
+function y() {
+  showToast({
+    subtitle: "Lolz this is the subtitle :D enjoy!",
+    title: "Lmaoooo this is the title!!",
+    isShowTimeBar: true,
+    isShowAppearAndDismissAnimation: true,
+    position: "top-left",
+    appearAnimationDirection: "right",
+    variant: "ERROR",
+    isShowIconAnimations: true,
+    isDismissable: false,
+    duration: 30000,
+    timerColor: "black",
+    isShowIcon: false,
+  });
+}

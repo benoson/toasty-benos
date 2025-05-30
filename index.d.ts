@@ -1,6 +1,6 @@
 // index.d.ts
 
-declare module "toasty-benos" {
+declare module "toastzilla" {
   // Define the types for the options your toast can accept
   export interface ToastOptions {
     variant?: "INFO" | "SUCCESS" | "ERROR";

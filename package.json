@@ -1,8 +1,8 @@
 {
-  "name": "toasty-benos",
+  "name": "toastzilla",
   "version": "1.2.0",
   "description": "a package for toasts",
-  "main": "dist/toasty-benos.js",
+  "main": "dist/toastzilla.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,17 +12,17 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benoson/toasty-benos.git"
+    "url": "git+https://github.com/benoson/toastzilla.git"
   },
   "bugs": {
-    "url": "https://github.com/benoson/toasty-benos/issues"
+    "url": "https://github.com/benoson/toastzilla/issues"
   },
-  "homepage": "https://github.com/benoson/toasty-benos#readme",
+  "homepage": "https://github.com/benoson/toastzilla#readme",
   "devDependencies": {
     "@babel/core": "^7.25.9",
     "@babel/preset-env": "^7.25.9",
     "babel-loader": "^9.2.1",
-    "webpack": "^5.95.0",
+    "webpack": "^5.99.9",
     "webpack-cli": "^5.1.4"
   }
 }
